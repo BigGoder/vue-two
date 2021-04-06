@@ -1,28 +1,87 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class='container'>  
+    <el-menu
+      default-active="home"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      @close="handleClose"
+      @select="selectItem"
+      background-color='#545C64'
+      router
+      >
+
+      <el-menu-item index="home">
+        <i class="el-icon-s-home"></i>
+        <span slot="title">首页</span>
+      </el-menu-item>
+      <el-menu-item index="about">
+        <i class="el-icon-menu"></i>
+        <span slot="title">设置</span>
+      </el-menu-item>
+      <el-menu-item index="d3">
+        <i class="el-icon-document"></i>
+        <span slot="title">导航三</span>
+      </el-menu-item>
+      <el-menu-item index="d4">
+        <i class="el-icon-setting"></i>
+        <span slot="title">导航四</span>
+      </el-menu-item>
+    </el-menu>
+
+    <div class='content'>
+      <router-view></router-view>
+      <!-- <Home v-show='showIndex ==0'></Home>
+      <About v-show='showIndex == 1'></About>
+      <D3 v-show='showIndex == 2'></D3>
+      <D4 v-show='showIndex == 4'></D4> -->
+    </div>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+
+
+  export default {
+    data() {
+      return {
+        showIndex: 0
+      }
+    },
+
+    mounted() {
+      
+
+    },
+
+    methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      selectItem(key){
+        this.showIndex = key
+      }
+    }
   }
-}
 </script>
+<style lang="less" scoped>
+  body{
+    padding: 0;
+    margin: 0;
+  }
+  .container{
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    .el-menu-vertical-demo{
+      width: 200px;
+      height: 100vh;
+    }
+    display: flex;
+
+    .content{
+      flex-grow: 1;
+    }
+
+  }
 </style>
